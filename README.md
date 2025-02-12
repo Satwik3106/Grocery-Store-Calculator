@@ -1,2 +1,62 @@
-# Grocery-Store-Calculator
-virtual expirience to grocery store .
+# List of basic grocery products with their prices per unit
+basic_grocery_prices = {
+    "apple": 0.5, "banana": 0.3, "milk": 1.2, "bread": 2.0, "eggs": 0.2,
+    "rice": 0.8, "wheat": 0.6, "sugar": 0.7, "salt": 0.5, "oil": 1.0,
+    "potato": 0.2, "onion": 0.3, "tomato": 0.4, "cabbage": 0.5, "carrot": 0.6,
+    "orange": 0.7, "soap": 0.8, "toothpaste": 0.9, "shampoo": 1.0,
+    "conditioner": 1.1, "toilet paper": 1.2, "tissue paper": 1.3, "handwash": 1.4,
+    "sanitizer": 1.5, "mask": 1.6, "sprite": 1.7, "coke": 1.8, "pepsi": 1.9,
+    "fanta": 2.0, "7up": 2.1, "lays": 2.2, "kurkure": 2.3, "bingo": 2.4,
+    "doritos": 2.5, "cheetos": 2.6, "peanut butter": 2.7, "jam": 2.8
+}
+
+print("\nWelcome to the grocery store!")
+print("Here is the list of available products with their prices per unit:\n")
+for item, price in basic_grocery_prices.items():
+    print(f"{item.capitalize()}: ${price:.2f}")
+
+total_cost = 0.0
+
+# Ask the user how many items they want to buy
+while True:
+    try:
+        num_items = int(input("\nEnter the number of items you want to buy: "))
+        if num_items <= 0:
+            print("Please enter a positive number.")
+        else:
+            break
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
+
+# Process each item
+for _ in range(num_items):
+    while True:
+        item_name = input("\nEnter the name of the item: ").strip().lower()
+
+        if item_name in basic_grocery_prices:
+            price_per_unit = basic_grocery_prices[item_name]
+            break
+        else:
+            print("❌ Invalid input! Item not found in the store. Please enter a valid item.")
+
+    while True:
+        try:
+            quantity = float(input(f"Enter the quantity of {item_name}: "))
+            if quantity < 0:
+                print("Quantity cannot be negative. Please enter a valid number.")
+            else:
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
+    total_price = quantity * price_per_unit
+    total_cost += total_price
+
+    print(f"✅ Total Cost for {item_name.capitalize()}: ${total_price:.2f}")
+
+# Display final total cost
+print("\n========================================")
+print(f"🛒 Total Cost for all items: ${total_cost:.2f}")
+print("Thank you for shopping with us! 🛍️")
+print("========================================")
+
